@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ProductQueue</string>
+
+    <string name="pleaseWait">Please wait&#8230;</string>
+</resources>
