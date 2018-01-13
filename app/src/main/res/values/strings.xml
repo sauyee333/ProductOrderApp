@@ -2,4 +2,7 @@
     <string name="app_name">ProductQueue</string>
 
     <string name="pleaseWait">Please wait&#8230;</string>
+    <string name="problemConnectRetry">There is a problem connecting to server. Please try again later.</string>
+    <string name="problemNetwork">We\'re unable to process your request. Check your connection or try again.</string>
+
 </resources>
