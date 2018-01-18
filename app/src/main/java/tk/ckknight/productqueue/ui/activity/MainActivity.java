@@ -19,7 +19,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tk.ckknight.productqueue.R;
-import tk.ckknight.productqueue.ui.fragment.MainFragment;
+import tk.ckknight.productqueue.ui.fragment.CartFragment;
+import tk.ckknight.productqueue.ui.fragment.InventoryFragment;
+import tk.ckknight.productqueue.ui.fragment.ProductListFragment;
+import tk.ckknight.productqueue.ui.fragment.QueueStatusFragment;
+import tk.ckknight.productqueue.ui.fragment.UserAccountFragment;
 import tk.ckknight.productqueue.ui.listener.IFragmentHostListener;
 
 public class MainActivity extends AppCompatActivity implements IFragmentHostListener {
@@ -44,25 +48,44 @@ public class MainActivity extends AppCompatActivity implements IFragmentHostList
     private ProgressDialog mLoadingDialog;
     private Toast mToast;
 
+    @OnClick(R.id.headerLogo)
+    public void loadProductListPage() {
+        _Debug("loadProductListPage");
+        getSupportFragmentManager()
+                .beginTransaction().replace(R.id.content,
+                ProductListFragment.getInstance()).commit();
+    }
+
     @OnClick(R.id.btnInventory)
     public void loadInventoryPage() {
         _Debug("loadInventoryPage");
-        Toast.makeText(mContext, "inventory", Toast.LENGTH_LONG);
+        getSupportFragmentManager()
+                .beginTransaction().replace(R.id.content,
+                InventoryFragment.getInstance()).commit();
     }
 
     @OnClick(R.id.btnQueueStatus)
     public void loadQueueStatusPage() {
         _Debug("loadQueueStatusPage");
+        getSupportFragmentManager()
+                .beginTransaction().replace(R.id.content,
+                QueueStatusFragment.getInstance()).commit();
     }
 
     @OnClick(R.id.btnCart)
     public void loadCartPage() {
         _Debug("loadCartPage");
+        getSupportFragmentManager()
+                .beginTransaction().replace(R.id.content,
+                CartFragment.getInstance()).commit();
     }
 
     @OnClick(R.id.btnLogin)
     public void loadLoginPage() {
         _Debug("loadLoginPage");
+        getSupportFragmentManager()
+                .beginTransaction().replace(R.id.content,
+                UserAccountFragment.getInstance()).commit();
     }
 
     @Override
@@ -73,11 +96,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentHostList
         _Debug("2. main activity mmmmmmmm");
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        
-        getSupportFragmentManager()
-                .beginTransaction().replace(R.id.content,
-                MainFragment.getInstance()).commit();
+
         mLoadingDialog = setupLoadingDialog();
+        loadProductListPage();
     }
 
     private void showFragment(Fragment frag, boolean popCurrent) {
