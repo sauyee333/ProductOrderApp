@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="toolbar_height">45dp</dimen>
+
+    <dimen name="font_size_large">18sp</dimen>
+    <dimen name="font_size_medium">15sp</dimen>
+    <dimen name="font_size_small">12sp</dimen>
+    <dimen name="general_button_width">350dp</dimen>
+    <dimen name="general_input_width">700dp</dimen>
 </resources>

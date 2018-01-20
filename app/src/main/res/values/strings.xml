@@ -5,4 +5,12 @@
     <string name="problemConnectRetry">There is a problem connecting to server. Please try again later.</string>
     <string name="problemNetwork">We\'re unable to process your request. Check your connection or try again.</string>
 
+    <string name="signup">Sign up</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="email">Email</string>
+    <string name="mobileNo">Mobile No.</string>
+    <string name="done">Done</string>
+
+
 </resources>
