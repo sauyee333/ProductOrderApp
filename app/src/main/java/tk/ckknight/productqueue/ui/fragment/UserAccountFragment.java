@@ -9,8 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -47,10 +50,16 @@ public class UserAccountFragment extends Fragment {
     List<View> navLogin;
     @BindView(R.id.loginLayout)
     LinearLayout loginLayout;
-    @BindView(R.id.mobileSignin)
-    EditText mobileSignin;
-    @BindView(R.id.nameSignin)
-    EditText nameSignin;
+    @BindView(R.id.mobileLogin)
+    EditText mobileLogin;
+    @BindView(R.id.nameLogin)
+    EditText nameLogin;
+    @BindView(R.id.useAdmin)
+    CheckBox useAdmin;
+    @BindView(R.id.loginFirstText)
+    TextView loginFirstText;
+    @BindView(R.id.loginSecondText)
+    TextView loginSecondText;
 
     private Activity mActivity;
     private Context mContext;
@@ -68,6 +77,8 @@ public class UserAccountFragment extends Fragment {
         mContext = getContext();
         ButterKnife.bind(this, view);
 
+        loadLoginPage();
+        updateAdminMenu();
         return view;
     }
 
@@ -115,14 +126,28 @@ public class UserAccountFragment extends Fragment {
     @OnClick(R.id.loginDone)
     public void proceedLogin() {
         _Debug("read input and login");
-        String mobile = mobileSignin.getText().toString();
-        String name = nameSignin.getText().toString();
+        String mobile = mobileLogin.getText().toString();
+        String name = nameLogin.getText().toString();
         if (!TextUtils.isEmpty(mobile) && !TextUtils.isEmpty(name)) {
-
         } else {
             Toast.makeText(mContext, "Incomplete details. Please fill in the form.", Toast.LENGTH_LONG)
                     .show();
         }
+    }
+
+    private void updateAdminMenu() {
+        useAdmin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    loginFirstText.setText("Username");
+                    loginSecondText.setText("Password");
+                } else {
+                    loginFirstText.setText("Mobile");
+                    loginSecondText.setText("Name");
+                }
+            }
+        });
     }
 
     private static void _Debug(String str) {

@@ -400,18 +400,19 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/loginFirstText"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginEnd="15dp"
                             android:layout_marginRight="15dp"
                             android:gravity="end"
-                            android:text="Mobile No."
+                            android:text="Username"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/font_size_medium" />
 
                         <RelativeLayout
-                            android:id="@+id/mobileSigninLayout"
+                            android:id="@+id/mobileLoginLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -419,13 +420,12 @@
                             android:visibility="visible">
 
                             <EditText
-                                android:id="@+id/mobileSignin"
+                                android:id="@+id/mobileLogin"
                                 android:layout_width="match_parent"
                                 android:layout_height="53dp"
-                                android:layout_toLeftOf="@+id/clearMobileSignin"
-                                android:layout_toStartOf="@+id/clearMobileSignin"
+                                android:layout_toLeftOf="@+id/clearMobileLogin"
+                                android:layout_toStartOf="@+id/clearMobileLogin"
                                 android:background="@android:color/transparent"
-                                android:hint="Mobile No."
                                 android:inputType="textEmailAddress"
                                 android:maxLength="254"
                                 android:padding="16dp"
@@ -437,7 +437,7 @@
                                 tools:text="alibaba@gmail.com" />
 
                             <LinearLayout
-                                android:id="@+id/clearMobileSignin"
+                                android:id="@+id/clearMobileLogin"
                                 android:layout_width="30dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -463,18 +463,19 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/loginSecondText"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginEnd="15dp"
                             android:layout_marginRight="15dp"
                             android:gravity="end"
-                            android:text="Name"
+                            android:text="Password"
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/font_size_medium" />
 
                         <RelativeLayout
-                            android:id="@+id/nameSigninLayout"
+                            android:id="@+id/nameLoginLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -482,13 +483,12 @@
                             android:visibility="visible">
 
                             <EditText
-                                android:id="@+id/nameSignin"
+                                android:id="@+id/nameLogin"
                                 android:layout_width="match_parent"
                                 android:layout_height="53dp"
-                                android:layout_toLeftOf="@+id/clearNameSignin"
-                                android:layout_toStartOf="@+id/clearNameSignin"
+                                android:layout_toLeftOf="@+id/clearNameLogin"
+                                android:layout_toStartOf="@+id/clearNameLogin"
                                 android:background="@android:color/transparent"
-                                android:hint="Name"
                                 android:inputType="textEmailAddress"
                                 android:maxLength="254"
                                 android:padding="16dp"
@@ -500,7 +500,7 @@
                                 tools:text="alibaba@gmail.com" />
 
                             <LinearLayout
-                                android:id="@+id/clearNameSignin"
+                                android:id="@+id/clearNameLogin"
                                 android:layout_width="30dp"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -515,6 +515,35 @@
                                     android:background="@drawable/ic_close_white" />
                             </LinearLayout>
                         </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/adminMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="30dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginEnd="15dp"
+                            android:layout_marginRight="15dp"
+                            android:gravity="end"
+                            android:text="Admin"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/font_size_medium" />
+
+                        <CheckBox
+                            android:buttonTint="@color/colorPrimary"
+                            android:id="@+id/useAdmin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" />
+
                     </LinearLayout>
 
                     <Button
