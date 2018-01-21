@@ -60,7 +60,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="10dp"
                         android:text="@string/login"
-                        android:textColor="@drawable/login_line_color"
+                        android:textColor="@drawable/text_color"
                         android:textSize="@dimen/font_size_medium" />
 
                     <View
@@ -70,7 +70,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/login_line_color" />
+                        android:background="@drawable/line_color" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -87,7 +87,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="10dp"
                         android:text="@string/signup"
-                        android:textColor="@drawable/login_line_color"
+                        android:textColor="@drawable/text_color"
                         android:textSize="@dimen/font_size_medium" />
 
                     <View
@@ -97,7 +97,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/login_line_color" />
+                        android:background="@drawable/line_color" />
                 </RelativeLayout>
             </LinearLayout>
 
