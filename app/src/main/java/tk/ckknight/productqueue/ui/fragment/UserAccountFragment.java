@@ -13,23 +13,46 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import tk.ckknight.productqueue.R;
+import tk.ckknight.productqueue.network.model.CkUserLoginInput;
+import tk.ckknight.productqueue.network.model.CkUserLoginResp;
+import tk.ckknight.productqueue.network.model.CkUserLogoutInput;
+import tk.ckknight.productqueue.network.model.CkUserLogoutResp;
+import tk.ckknight.productqueue.network.rest.ckKnight.CkRestClient;
+import tk.ckknight.productqueue.network.rest.ckKnight.CkRestInterface;
+import tk.ckknight.productqueue.network.rest.ckKnight.ProgressSubscriber;
+import tk.ckknight.productqueue.network.rest.ckKnight.SubscriberOnNextListener;
 import tk.ckknight.productqueue.util.ButterknifeHelper;
+import tk.ckknight.productqueue.util.SharedPrefHelper;
 
 /**
  * Created by sauyee on 19/1/18.
  */
 
 public class UserAccountFragment extends Fragment {
+
+    //logout
+    @BindView(R.id.LogoutLayout)
+    RelativeLayout LogoutLayout;
+    @BindView(R.id.needLoginLayout)
+    ScrollView needLoginLayout;
 
     //signup
     @BindViews({R.id.signupText, R.id.signupUnderline})
@@ -63,6 +86,7 @@ public class UserAccountFragment extends Fragment {
 
     private Activity mActivity;
     private Context mContext;
+    private String userId;
 
     public static UserAccountFragment getInstance() {
         UserAccountFragment fragment = new UserAccountFragment();
@@ -77,9 +101,29 @@ public class UserAccountFragment extends Fragment {
         mContext = getContext();
         ButterKnife.bind(this, view);
 
+        if (!checkSavedLoginInfo()) {
+            setupLoginScreen();
+        } else {
+            _Debug("not showing login page");
+            showLogoutScreen();
+        }
+        return view;
+    }
+
+    private void showLogoutScreen() {
+        LogoutLayout.setVisibility(View.VISIBLE);
+        needLoginLayout.setVisibility(View.GONE);
+    }
+
+    private void showLoginSignupScreen() {
+        LogoutLayout.setVisibility(View.GONE);
+        needLoginLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void setupLoginScreen() {
+        showLoginSignupScreen();
         loadLoginPage();
         updateAdminMenu();
-        return view;
     }
 
     private void highlightLoginButton() {
@@ -129,10 +173,43 @@ public class UserAccountFragment extends Fragment {
         String mobile = mobileLogin.getText().toString();
         String name = nameLogin.getText().toString();
         if (!TextUtils.isEmpty(mobile) && !TextUtils.isEmpty(name)) {
+            if (useAdmin.isChecked()) {
+                postUserLogin(mobile, name);
+            } else {
+
+            }
         } else {
             Toast.makeText(mContext, "Incomplete details. Please fill in the form.", Toast.LENGTH_LONG)
                     .show();
         }
+    }
+
+    @OnClick(R.id.logoutButton)
+    public void logoutUser() {
+//        String username = SharedPrefHelper.readStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_USERNAME, "");
+        if (!TextUtils.isEmpty(userId)) {
+            postUserLogout(userId);
+        }
+        SharedPrefHelper.removeStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_USERNAME);
+        setupLoginScreen();
+    }
+
+    private boolean checkSavedLoginInfo() {
+        Gson gson = new Gson();
+        String json = SharedPrefHelper.readStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_LOGIN_INFO, "");
+        CkUserLoginResp loginResp = gson.fromJson(json, CkUserLoginResp.class);
+        if (loginResp != null) {
+            String status = loginResp.getStatus();
+            if (!TextUtils.isEmpty(status) && status.equals("OK")) {
+                userId = loginResp.getUserId();
+                if (!TextUtils.isEmpty(userId)) {
+                    _Debug("userId is: (" + userId + ")");
+                    _Debug("going to show logout info ------");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void updateAdminMenu() {
@@ -149,6 +226,8 @@ public class UserAccountFragment extends Fragment {
             }
         });
     }
+
+    
 
     private static void _Debug(String str) {
         Log.d("widget", str);
