@@ -60,7 +60,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="10dp"
                         android:text="@string/login"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@drawable/login_line_color"
                         android:textSize="@dimen/font_size_medium" />
 
                     <View
@@ -87,7 +87,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="10dp"
                         android:text="@string/signup"
-                        android:textColor="@color/typeGray"
+                        android:textColor="@drawable/login_line_color"
                         android:textSize="@dimen/font_size_medium" />
 
                     <View
