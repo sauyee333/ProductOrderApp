@@ -44,7 +44,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     @Override
     public void onBindViewHolder(ProductHolder holder, int position) {
-
+        StockProductData productData = mDataList.get(position);
+        holder.assetType.setText(productData.getProductName());
+        holder.assetTitle.setText(productData.getAvailableQty() + " " + productData.getUnit());
+        holder.duration.setText(productData.getUnitPrice() + "/" + productData.getUnit());
     }
 
     @Override

@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/ic_arrow_white" />
+                        android:src="@drawable/holderportrait1" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -53,7 +53,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/ic_arrow_white"
                         android:visibility="invisible" />
 
                     <ImageView
@@ -62,7 +61,6 @@
                         android:layout_alignEnd="@+id/imageHolder"
                         android:layout_alignRight="@+id/imageHolder"
                         android:layout_alignTop="@+id/imageHolder"
-                        android:src="@drawable/ic_arrow_white"
                         android:visibility="visible" />
                 </RelativeLayout>
 
@@ -102,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="11sp"
+                        android:textSize="16sp"
                         android:visibility="visible"
                         tools:text="assetType" />
                 </RelativeLayout>
@@ -113,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
+                    android:textSize="11sp"
                     android:visibility="visible"
                     tools:text="assetTitle" />
 
@@ -134,6 +132,7 @@
                     android:background="@color/hintGray"
                     android:padding="5dp"
                     android:textSize="13sp"
+                    android:visibility="gone"
                     tools:text="summary" />
             </LinearLayout>
 
@@ -149,7 +148,7 @@
                     android:layout_marginLeft="30dp"
                     android:background="@drawable/drawable_white_border"
                     android:orientation="vertical"
-                    android:visibility="invisible">
+                    android:visibility="visible">
 
                     <RelativeLayout
                         android:id="@+id/btnDownload"
@@ -165,8 +164,7 @@
                             android:adjustViewBounds="true"
                             android:paddingBottom="5dp"
                             android:paddingRight="10dp"
-                            android:paddingTop="5dp"
-                            android:src="@drawable/ic_arrow_white" />
+                            android:paddingTop="5dp" />
 
                         <TextView
                             android:id="@+id/btnDownloadText"
@@ -174,7 +172,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:layout_toRightOf="@+id/btnDownloadImg"
-                            android:text="Download"
+                            android:text="Quantity: "
                             android:textSize="12sp"
                             tools:text="btnDownloadText" />
                     </RelativeLayout>
@@ -209,8 +207,7 @@
                             <ImageView
                                 android:id="@+id/btnPlayImg"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:src="@drawable/ic_arrow_white" />
+                                android:layout_height="match_parent" />
                         </FrameLayout>
 
                         <TextView
@@ -221,7 +218,7 @@
                             android:layout_marginStart="10dp"
                             android:layout_toEndOf="@+id/frame_for_image_and_loader"
                             android:layout_toRightOf="@+id/frame_for_image_and_loader"
-                            android:text="play"
+                            android:text="Total: "
                             android:textSize="12sp"
                             tools:text="play" />
                     </RelativeLayout>
