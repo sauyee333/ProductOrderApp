@@ -46,7 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     public void onBindViewHolder(ProductHolder holder, int position) {
         StockProductData productData = mDataList.get(position);
         holder.assetType.setText(productData.getProductName());
-        holder.assetTitle.setText(productData.getAvailableQty() + " " + productData.getUnit());
+        holder.assetTitle.setText(productData.getAvailableQty() + " " + productData.getUnit() + " available");
         holder.duration.setText(productData.getUnitPrice() + "/" + productData.getUnit());
     }
 
