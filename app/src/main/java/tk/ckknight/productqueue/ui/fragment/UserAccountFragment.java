@@ -124,11 +124,9 @@ public class UserAccountFragment extends Fragment {
     private void showLogoutScreen() {
         String usrname = SharedPrefHelper.readStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_USERNAME, "");
         if (!TextUtils.isEmpty(usrname)) {
-            _Debug("userName: (" + userName + ")");
-            username.setText("Login as " + userName);
+            username.setText("Login as " + usrname);
             username.setVisibility(View.VISIBLE);
         } else {
-            _Debug("userName invi");
             username.setVisibility(View.GONE);
         }
         logoutLayout.setVisibility(View.VISIBLE);
