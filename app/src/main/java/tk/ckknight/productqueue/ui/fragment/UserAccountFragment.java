@@ -13,7 +13,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,16 +48,14 @@ import tk.ckknight.productqueue.util.SysUtil;
 public class UserAccountFragment extends Fragment {
 
     //logout
-    @BindView(R.id.LogoutLayout)
-    LinearLayout LogoutLayout;
+    @BindView(R.id.logoutLayout)
+    LinearLayout logoutLayout;
     @BindView(R.id.username)
     TextView username;
 
     //signup
-    @BindView(R.id.signupLayout)
-    LinearLayout signupLayout;
-    @BindView(R.id.inputLayout)
-    RelativeLayout inputLayout;
+    @BindView(R.id.userSignupLayout)
+    LinearLayout userSignupLayout;
     @BindViews({R.id.signupText, R.id.signupUnderline})
     List<View> navSignup;
     @BindView(R.id.mobileSignup)
@@ -71,22 +68,22 @@ public class UserAccountFragment extends Fragment {
     EditText birthSignup;
 
     //login
-    @BindView(R.id.loginOption)
-    LinearLayout loginOption;
-    @BindViews({R.id.loginText, R.id.loginUnderline})
-    List<View> navLogin;
     @BindView(R.id.loginLayout)
     LinearLayout loginLayout;
-    @BindView(R.id.mobileLogin)
-    EditText mobileLogin;
-    @BindView(R.id.nameLogin)
-    EditText nameLogin;
+    @BindViews({R.id.loginText, R.id.loginUnderline})
+    List<View> navLogin;
+    @BindView(R.id.adminLoginLayout)
+    LinearLayout adminLoginLayout;
+    @BindView(R.id.userNameInput)
+    EditText userNameInput;
+    @BindView(R.id.passwordInput)
+    EditText passwordInput;
     @BindView(R.id.useAdmin)
     CheckBox useAdmin;
-    @BindView(R.id.loginFirstText)
-    TextView loginFirstText;
-    @BindView(R.id.loginSecondText)
-    TextView loginSecondText;
+//    @BindView(R.id.userNameLabel)
+//    TextView userNameLabel;
+//    @BindView(R.id.passwordLabel)
+//    TextView passwordLabel;
 
     private Activity mActivity;
     private Context mContext;
@@ -104,43 +101,9 @@ public class UserAccountFragment extends Fragment {
         mActivity = getActivity();
         mContext = getContext();
         ButterKnife.bind(this, view);
-
-        if (!checkSavedLoginInfo()) {
-            setupLoginScreen();
-        } else {
-            _Debug("not showing login page");
-            showLogoutScreen();
-        }
-        return view;
-    }
-
-    private void showLogoutScreen() {
-        _Debug("2. showLogoutScreen: ");
-        if (!TextUtils.isEmpty(userName)) {
-            _Debug("userName: (" + userName + ")");
-            username.setText("Login as " + userName);
-            username.setVisibility(View.VISIBLE);
-        } else {
-            _Debug("userName invi");
-            username.setVisibility(View.GONE);
-        }
-        _Debug("2a. showLogoutScreen: ");
-        LogoutLayout.setVisibility(View.VISIBLE);
-        loginOption.setVisibility(View.GONE);
-        inputLayout.setVisibility(View.GONE);
-    }
-
-    private void showLoginSignupScreen() {
-        _Debug("showLoginSignupScreen");
-        LogoutLayout.setVisibility(View.GONE);
-        loginOption.setVisibility(View.VISIBLE);
-        inputLayout.setVisibility(View.GONE);
-    }
-
-    private void setupLoginScreen() {
-        showLoginSignupScreen();
         loadLoginPage();
-        updateAdminMenu();
+
+        return view;
     }
 
     private void highlightLoginButton() {
@@ -153,25 +116,47 @@ public class UserAccountFragment extends Fragment {
         ButterKnife.apply(navSignup, ButterknifeHelper.SELECT_NAV_BUTTONS);
     }
 
+    private void showLoginScreen() {
+        logoutLayout.setVisibility(View.GONE);
+        loginLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void showLogoutScreen() {
+        String usrname = SharedPrefHelper.readStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_USERNAME, "");
+        if (!TextUtils.isEmpty(usrname)) {
+            _Debug("userName: (" + userName + ")");
+            username.setText("Login as " + userName);
+            username.setVisibility(View.VISIBLE);
+        } else {
+            _Debug("userName invi");
+            username.setVisibility(View.GONE);
+        }
+        logoutLayout.setVisibility(View.VISIBLE);
+        loginLayout.setVisibility(View.GONE);
+    }
+
     @OnClick(R.id.btnLogin)
     public void loadLoginPage() {
         highlightLoginButton();
-        loginLayout.setVisibility(View.VISIBLE);
-        signupLayout.setVisibility(View.GONE);
-        inputLayout.setVisibility(View.VISIBLE);
+        if (!checkSavedLoginInfo()) {
+            showLoginScreen();
+        } else {
+            showLogoutScreen();
+        }
+
+        adminLoginLayout.setVisibility(View.VISIBLE);
+        userSignupLayout.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.btnSignup)
     public void loadSignupPage() {
         highlightSignupButton();
-        signupLayout.setVisibility(View.VISIBLE);
-        inputLayout.setVisibility(View.VISIBLE);
-        loginLayout.setVisibility(View.GONE);
+        userSignupLayout.setVisibility(View.VISIBLE);
+        adminLoginLayout.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.signupDone)
     public void proceedSignUp() {
-        _Debug("read input and sign up");
         String mobile = mobileSignup.getText().toString();
         String name = nameSignup.getText().toString();
         String email = emailSignup.getText().toString();
@@ -188,12 +173,11 @@ public class UserAccountFragment extends Fragment {
 
     @OnClick(R.id.loginDone)
     public void proceedLogin() {
-        _Debug("read input and login");
-        String mobile = mobileLogin.getText().toString();
-        String name = nameLogin.getText().toString();
-        if (!TextUtils.isEmpty(mobile) && !TextUtils.isEmpty(name)) {
+        String usrName = userNameInput.getText().toString();
+        String name = passwordInput.getText().toString();
+        if (!TextUtils.isEmpty(usrName) && !TextUtils.isEmpty(name)) {
             if (useAdmin.isChecked()) {
-                postUserLogin(mobile, name);
+                postUserLogin(usrName, name);
             } else {
 
             }
@@ -210,17 +194,15 @@ public class UserAccountFragment extends Fragment {
             postUserLogout(userId);
         }
         SharedPrefHelper.removeStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_USERNAME);
-        setupLoginScreen();
+        showLoginScreen();
     }
 
     private boolean checkSavedLoginInfo() {
         UserLoginResp userLoginResp = SysUtil.getLoginUserId(mContext);
-        if(userLoginResp!= null) {
+        if (userLoginResp != null) {
             userId = userLoginResp.getUserId();
             userName = userLoginResp.getName();
             if (!TextUtils.isEmpty(userId)) {
-                _Debug("userId is: (" + userId + ")");
-                _Debug("going to show logout info ------");
                 return true;
             }
         }
@@ -232,11 +214,11 @@ public class UserAccountFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 //                if (isChecked) {
-//                    loginFirstText.setText("Username");
-//                    loginSecondText.setText("Password");
+//                    userNameLabel.setText("Username");
+//                    passwordLabel.setText("Password");
 //                } else {
-//                    loginFirstText.setText("Mobile");
-//                    loginSecondText.setText("Name");
+//                    userNameLabel.setText("Mobile");
+//                    passwordLabel.setText("Name");
 //                }
             }
         });
