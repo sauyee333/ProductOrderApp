@@ -118,7 +118,7 @@ public class UserAccountFragment extends Fragment {
         _Debug("2. showLogoutScreen: ");
         if (!TextUtils.isEmpty(userName)) {
             _Debug("userName: (" + userName + ")");
-            username.setText(userName);
+            username.setText("Login as " + userName);
             username.setVisibility(View.VISIBLE);
         } else {
             _Debug("userName invi");
@@ -242,6 +242,7 @@ public class UserAccountFragment extends Fragment {
         });
     }
 
+    
 
     private static void _Debug(String str) {
         Log.d("widget", str);

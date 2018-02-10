@@ -24,6 +24,7 @@
                 android:layout_width="@dimen/general_button_width"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"
                 android:elevation="9dp"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -44,11 +45,13 @@
                     android:layout_width="@dimen/general_button_width"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:background="@color/colorPrimary"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:singleLine="true"
                     android:text="Logout"
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/font_size_large" />
             </LinearLayout>
@@ -537,14 +540,14 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:visibility="gone"
                         android:id="@+id/adminMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:layout_marginTop="30dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="80dp"
