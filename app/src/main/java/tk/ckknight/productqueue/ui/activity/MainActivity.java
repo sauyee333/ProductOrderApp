@@ -15,7 +15,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tk.ckknight.productqueue.R;
@@ -25,6 +28,7 @@ import tk.ckknight.productqueue.ui.fragment.ProductListFragment;
 import tk.ckknight.productqueue.ui.fragment.QueueStatusFragment;
 import tk.ckknight.productqueue.ui.fragment.UserAccountFragment;
 import tk.ckknight.productqueue.ui.listener.IFragmentHostListener;
+import tk.ckknight.productqueue.util.ButterknifeHelper;
 
 public class MainActivity extends AppCompatActivity implements IFragmentHostListener {
 
@@ -44,13 +48,62 @@ public class MainActivity extends AppCompatActivity implements IFragmentHostList
     @BindView(R.id.btnLogin)
     RelativeLayout btnLogin;
 
+    @BindViews({R.id.txtInventory})
+    List<View> navInventory;
+    @BindViews({R.id.txtQueueStatus})
+    List<View> navQueueStatus;
+    @BindViews({R.id.txtCart})
+    List<View> navCart;
+    @BindViews({R.id.txtLogin})
+    List<View> navLogin;
+
     private Context mContext;
     private ProgressDialog mLoadingDialog;
     private Toast mToast;
 
+    private void highlightProductListButton() {
+        ButterKnife.apply(navQueueStatus, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navLogin, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navCart, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navInventory, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+    }
+
+    private void highlightInventoryButton() {
+        ButterKnife.apply(navQueueStatus, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navLogin, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navCart, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+
+        ButterKnife.apply(navInventory, ButterknifeHelper.SELECT_NAV_BUTTONS);
+    }
+
+    private void highlightQueueStatusButton() {
+        ButterKnife.apply(navInventory, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navCart, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navLogin, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+
+        ButterKnife.apply(navQueueStatus, ButterknifeHelper.SELECT_NAV_BUTTONS);
+    }
+
+    private void highlightCartButton() {
+        ButterKnife.apply(navInventory, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navQueueStatus, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navLogin, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+
+        ButterKnife.apply(navCart, ButterknifeHelper.SELECT_NAV_BUTTONS);
+    }
+
+    private void highlightLoginButton() {
+        ButterKnife.apply(navInventory, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navQueueStatus, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+        ButterKnife.apply(navCart, ButterknifeHelper.UNSELECT_NAV_BUTTONS);
+
+        ButterKnife.apply(navLogin, ButterknifeHelper.SELECT_NAV_BUTTONS);
+    }
+
     @OnClick(R.id.headerLogo)
     public void loadProductListPage() {
         _Debug("loadProductListPage");
+        highlightProductListButton();
         getSupportFragmentManager()
                 .beginTransaction().replace(R.id.content,
                 ProductListFragment.getInstance()).commit();
@@ -59,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentHostList
     @OnClick(R.id.btnInventory)
     public void loadInventoryPage() {
         _Debug("loadInventoryPage");
+        highlightInventoryButton();
         getSupportFragmentManager()
                 .beginTransaction().replace(R.id.content,
                 InventoryFragment.getInstance()).commit();
@@ -67,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentHostList
     @OnClick(R.id.btnQueueStatus)
     public void loadQueueStatusPage() {
         _Debug("loadQueueStatusPage");
+        highlightQueueStatusButton();
         getSupportFragmentManager()
                 .beginTransaction().replace(R.id.content,
                 QueueStatusFragment.getInstance()).commit();
@@ -75,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentHostList
     @OnClick(R.id.btnCart)
     public void loadCartPage() {
         _Debug("loadCartPage");
+        highlightCartButton();
         getSupportFragmentManager()
                 .beginTransaction().replace(R.id.content,
                 CartFragment.getInstance()).commit();
@@ -83,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentHostList
     @OnClick(R.id.btnLogin)
     public void loadLoginPage() {
         _Debug("loadLoginPage");
+        highlightLoginButton();
         getSupportFragmentManager()
                 .beginTransaction().replace(R.id.content,
                 UserAccountFragment.getInstance()).commit();

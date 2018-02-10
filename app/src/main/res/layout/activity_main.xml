@@ -114,7 +114,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Inventory" />
+                        android:text="Inventory"
+                        android:textColor="@drawable/navigation_text_color"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
@@ -131,7 +133,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Queue Status" />
+                        android:text="Queue Status"
+                        android:textColor="@drawable/navigation_text_color"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
@@ -150,7 +154,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="Cart"
-                        android:textColor="@color/white" />
+                        android:textColor="@drawable/navigation_text_color"
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
@@ -168,6 +173,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:text="Login"
+                        android:textColor="@drawable/navigation_text_color"
                         android:textSize="18sp" />
 
                 </RelativeLayout>
