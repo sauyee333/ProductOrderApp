@@ -95,275 +95,321 @@
                     android:layout_width="@dimen/general_input_width"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:visibility="gone">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginTop="30dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/mobileText"
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginRight="15dp"
-                            android:gravity="end"
-                            android:text="Mobile"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/font_size_medium" />
-
-                        <RelativeLayout
-                            android:id="@+id/mobileInputLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/transparent_grey_border_background"
-                            android:visibility="visible">
-
-                            <EditText
-                                android:id="@+id/mobileSignup"
-                                android:layout_width="match_parent"
-                                android:layout_height="53dp"
-                                android:layout_toLeftOf="@+id/clearMobile"
-                                android:layout_toStartOf="@+id/clearMobile"
-                                android:background="@android:color/transparent"
-                                android:hint="Mobile No."
-                                android:inputType="textEmailAddress"
-                                android:maxLength="254"
-                                android:padding="16dp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/colorPrimary"
-                                android:textColorHint="@color/hintGray"
-                                android:textSize="@dimen/font_size_medium"
-                                tools:text="alibaba@gmail.com" />
-
-                            <LinearLayout
-                                android:id="@+id/clearMobile"
-                                android:layout_width="30dp"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:visibility="visible">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/ic_close_white" />
-                            </LinearLayout>
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginTop="30dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginRight="15dp"
-                            android:gravity="end"
-                            android:text="Name"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/font_size_medium" />
-
-                        <RelativeLayout
-                            android:id="@+id/nameInputLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/transparent_grey_border_background"
-                            android:visibility="visible">
-
-                            <EditText
-                                android:id="@+id/nameSignup"
-                                android:layout_width="match_parent"
-                                android:layout_height="53dp"
-                                android:layout_toLeftOf="@+id/clearName"
-                                android:layout_toStartOf="@+id/clearName"
-                                android:background="@android:color/transparent"
-                                android:hint="Name"
-                                android:inputType="textEmailAddress"
-                                android:maxLength="254"
-                                android:padding="16dp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/colorPrimary"
-                                android:textColorHint="@color/hintGray"
-                                android:textSize="@dimen/font_size_medium"
-                                tools:text="alibaba@gmail.com" />
-
-                            <LinearLayout
-                                android:id="@+id/clearName"
-                                android:layout_width="30dp"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:visibility="visible">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/ic_close_white" />
-                            </LinearLayout>
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginTop="30dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginRight="15dp"
-                            android:gravity="end"
-                            android:text="Email"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/font_size_medium" />
-
-                        <RelativeLayout
-                            android:id="@+id/emailSignupLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/transparent_grey_border_background"
-                            android:visibility="visible">
-
-                            <EditText
-                                android:id="@+id/emailSignup"
-                                android:layout_width="match_parent"
-                                android:layout_height="53dp"
-                                android:layout_toLeftOf="@+id/clearEmailSignup"
-                                android:layout_toStartOf="@+id/clearEmailSignup"
-                                android:background="@android:color/transparent"
-                                android:hint="Email"
-                                android:inputType="textEmailAddress"
-                                android:maxLength="254"
-                                android:padding="16dp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/colorPrimary"
-                                android:textColorHint="@color/hintGray"
-                                android:textSize="@dimen/font_size_medium"
-                                tools:text="alibaba@gmail.com" />
-
-                            <LinearLayout
-                                android:id="@+id/clearEmailSignup"
-                                android:layout_width="30dp"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:visibility="visible">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/ic_close_white" />
-                            </LinearLayout>
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="30dp"
-                        android:layout_marginTop="30dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="80dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="15dp"
-                            android:layout_marginRight="15dp"
-                            android:gravity="end"
-                            android:text="Date of birth"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/font_size_medium" />
-
-                        <RelativeLayout
-                            android:id="@+id/birthInputLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/transparent_grey_border_background"
-                            android:visibility="visible">
-
-                            <EditText
-                                android:id="@+id/birthSignup"
-                                android:layout_width="match_parent"
-                                android:layout_height="53dp"
-                                android:layout_toLeftOf="@+id/clearBirth"
-                                android:layout_toStartOf="@+id/clearBirth"
-                                android:background="@android:color/transparent"
-                                android:hint="DD/MM/YYYY"
-                                android:inputType="textEmailAddress"
-                                android:maxLength="254"
-                                android:padding="16dp"
-                                android:singleLine="true"
-                                android:text=""
-                                android:textColor="@color/colorPrimary"
-                                android:textColorHint="@color/hintGray"
-                                android:textSize="@dimen/font_size_medium"
-                                tools:text="alibaba@gmail.com" />
-
-                            <LinearLayout
-                                android:id="@+id/clearBirth"
-                                android:layout_width="30dp"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:visibility="visible">
-
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/ic_close_white" />
-                            </LinearLayout>
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/signupDone"
+                        android:id="@+id/clientLogoutLayout"
                         android:layout_width="@dimen/general_button_width"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="30dp"
-                        android:background="@color/colorPrimary"
-                        android:padding="16dp"
-                        android:text="@string/done"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_medium" />
+                        android:layout_marginTop="50dp"
+                        android:elevation="9dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/clientMobile"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="50dp"
+                            android:text=""
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/font_size_medium" />
+
+                        <Button
+                            android:id="@+id/clientLogoutButton"
+                            android:layout_width="@dimen/general_button_width"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:padding="10dp"
+                            android:singleLine="true"
+                            android:text="Logout"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/font_size_large" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/clientInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="30dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/mobileText"
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginRight="15dp"
+                                android:gravity="end"
+                                android:text="Mobile"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_size_medium" />
+
+                            <RelativeLayout
+                                android:id="@+id/mobileInputLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/transparent_grey_border_background"
+                                android:visibility="visible">
+
+                                <EditText
+                                    android:id="@+id/mobileSignup"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="53dp"
+                                    android:layout_toLeftOf="@+id/clearMobile"
+                                    android:layout_toStartOf="@+id/clearMobile"
+                                    android:background="@android:color/transparent"
+                                    android:hint=""
+                                    android:inputType="phone"
+                                    android:maxLength="254"
+                                    android:padding="16dp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/colorPrimary"
+                                    android:textColorHint="@color/hintGray"
+                                    android:textSize="@dimen/font_size_medium"
+                                    tools:text="alibaba@gmail.com" />
+
+                                <LinearLayout
+                                    android:id="@+id/clearMobile"
+                                    android:layout_width="30dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:visibility="visible">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/ic_close_white" />
+                                </LinearLayout>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="30dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginRight="15dp"
+                                android:gravity="end"
+                                android:text="Name"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_size_medium" />
+
+                            <RelativeLayout
+                                android:id="@+id/nameInputLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/transparent_grey_border_background"
+                                android:visibility="visible">
+
+                                <EditText
+                                    android:id="@+id/nameSignup"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="53dp"
+                                    android:layout_toLeftOf="@+id/clearName"
+                                    android:layout_toStartOf="@+id/clearName"
+                                    android:background="@android:color/transparent"
+                                    android:hint=""
+                                    android:inputType="textCapCharacters"
+                                    android:maxLength="254"
+                                    android:padding="16dp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/colorPrimary"
+                                    android:textColorHint="@color/hintGray"
+                                    android:textSize="@dimen/font_size_medium"
+                                    tools:text="alibaba@gmail.com" />
+
+                                <LinearLayout
+                                    android:id="@+id/clearName"
+                                    android:layout_width="30dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:visibility="visible">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/ic_close_white" />
+                                </LinearLayout>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="30dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginRight="15dp"
+                                android:gravity="end"
+                                android:text="Email"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_size_medium" />
+
+                            <RelativeLayout
+                                android:id="@+id/emailSignupLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/transparent_grey_border_background"
+                                android:visibility="visible">
+
+                                <EditText
+                                    android:id="@+id/emailSignup"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="53dp"
+                                    android:layout_toLeftOf="@+id/clearEmailSignup"
+                                    android:layout_toStartOf="@+id/clearEmailSignup"
+                                    android:background="@android:color/transparent"
+                                    android:hint="abc@gmail.com"
+                                    android:inputType="textEmailAddress"
+                                    android:maxLength="254"
+                                    android:padding="16dp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/colorPrimary"
+                                    android:textColorHint="@color/hintGray"
+                                    android:textSize="@dimen/font_size_medium"
+                                    tools:text="alibaba@gmail.com" />
+
+                                <LinearLayout
+                                    android:id="@+id/clearEmailSignup"
+                                    android:layout_width="30dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:visibility="visible">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/ic_close_white" />
+                                </LinearLayout>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:layout_marginTop="30dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="80dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="15dp"
+                                android:layout_marginRight="15dp"
+                                android:gravity="end"
+                                android:text="Date of birth"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="@dimen/font_size_medium" />
+
+                            <RelativeLayout
+                                android:id="@+id/birthInputLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/transparent_grey_border_background"
+                                android:visibility="visible">
+
+                                <EditText
+                                    android:id="@+id/birthSignup"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="53dp"
+                                    android:layout_toLeftOf="@+id/clearBirth"
+                                    android:layout_toStartOf="@+id/clearBirth"
+                                    android:background="@android:color/transparent"
+                                    android:hint="DD/MM/YYYY"
+                                    android:inputType="date"
+                                    android:focusable="false"
+                                    android:clickable="true"
+                                    android:maxLength="254"
+                                    android:padding="16dp"
+                                    android:singleLine="true"
+                                    android:text=""
+                                    android:textColor="@color/colorPrimary"
+                                    android:textColorHint="@color/hintGray"
+                                    android:textSize="@dimen/font_size_medium"
+                                    tools:text="alibaba@gmail.com" />
+
+                                <LinearLayout
+                                    android:id="@+id/clearBirth"
+                                    android:layout_width="30dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:visibility="visible">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/ic_close_white" />
+                                </LinearLayout>
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/signupDone"
+                            android:layout_width="@dimen/general_button_width"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="30dp"
+                            android:background="@color/colorPrimary"
+                            android:padding="16dp"
+                            android:text="@string/done"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_size_medium" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -372,7 +418,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:id="@+id/logoutLayout"
@@ -455,7 +502,7 @@
                                     android:maxLength="254"
                                     android:padding="16dp"
                                     android:singleLine="true"
-                                    android:text="gadmin"
+                                    android:text=""
                                     android:textColor="@color/colorPrimary"
                                     android:textColorHint="@color/hintGray"
                                     android:textSize="@dimen/font_size_medium"
@@ -512,11 +559,11 @@
                                     android:layout_toLeftOf="@+id/clearPassword"
                                     android:layout_toStartOf="@+id/clearPassword"
                                     android:background="@android:color/transparent"
-                                    android:inputType="textEmailAddress"
+                                    android:inputType="textPassword"
                                     android:maxLength="254"
                                     android:padding="16dp"
                                     android:singleLine="true"
-                                    android:text="gadmin123"
+                                    android:text=""
                                     android:textColor="@color/colorPrimary"
                                     android:textColorHint="@color/hintGray"
                                     android:textSize="@dimen/font_size_medium"
