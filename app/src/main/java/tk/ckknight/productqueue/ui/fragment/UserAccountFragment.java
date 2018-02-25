@@ -1,6 +1,7 @@
 package tk.ckknight.productqueue.ui.fragment;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,8 +21,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -29,6 +34,7 @@ import butterknife.OnClick;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import tk.ckknight.productqueue.R;
+import tk.ckknight.productqueue.network.model.CustomerData;
 import tk.ckknight.productqueue.network.model.UserLoginInput;
 import tk.ckknight.productqueue.network.model.UserLoginResp;
 import tk.ckknight.productqueue.network.model.UserLogoutInput;
@@ -47,15 +53,17 @@ import tk.ckknight.productqueue.util.SysUtil;
 
 public class UserAccountFragment extends Fragment {
 
-    //logout
+    //admin logout
     @BindView(R.id.logoutLayout)
     LinearLayout logoutLayout;
     @BindView(R.id.username)
     TextView username;
 
-    //signup
+    //client signup
     @BindView(R.id.userSignupLayout)
     LinearLayout userSignupLayout;
+    @BindView(R.id.clientInputLayout)
+    LinearLayout clientInputLayout;
     @BindViews({R.id.signupText, R.id.signupUnderline})
     List<View> navSignup;
     @BindView(R.id.mobileSignup)
@@ -67,7 +75,19 @@ public class UserAccountFragment extends Fragment {
     @BindView(R.id.birthSignup)
     EditText birthSignup;
 
-    //login
+    //client logout
+    @BindView(R.id.clientLogoutLayout)
+    LinearLayout clientLogoutLayout;
+    @BindView(R.id.clientMobile)
+    TextView clientMobile;
+    @BindView(R.id.clientName)
+    TextView clientName;
+    @BindView(R.id.clientEmail)
+    TextView clientEmail;
+    @BindView(R.id.clientBirthDate)
+    TextView clientBirthDate;
+
+    //admin login
     @BindView(R.id.loginLayout)
     LinearLayout loginLayout;
     @BindViews({R.id.loginText, R.id.loginUnderline})
@@ -88,6 +108,7 @@ public class UserAccountFragment extends Fragment {
     private Activity mActivity;
     private Context mContext;
     private String userId, userName;
+    private String customerMobile, customerName, customerEmail, customerBirthDate;
 
     public static UserAccountFragment getInstance() {
         UserAccountFragment fragment = new UserAccountFragment();
@@ -97,7 +118,6 @@ public class UserAccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_account, container, false);
-        _Debug("UserAccountFragment onCreateView");
         mActivity = getActivity();
         mContext = getContext();
         ButterKnife.bind(this, view);
@@ -116,12 +136,26 @@ public class UserAccountFragment extends Fragment {
         ButterKnife.apply(navSignup, ButterknifeHelper.SELECT_NAV_BUTTONS);
     }
 
-    private void showLoginScreen() {
+    private void showCustomerLoginScreen() {
+        clientLogoutLayout.setVisibility(View.GONE);
+        clientInputLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void showCustomerLogoutScreen() {
+        clientMobile.setText("Mobile: " + customerMobile);
+        clientName.setText("Name: " + customerName);
+        clientEmail.setText("Email: " + customerEmail);
+        clientBirthDate.setText("DOB: " + customerBirthDate);
+        clientLogoutLayout.setVisibility(View.VISIBLE);
+        clientInputLayout.setVisibility(View.GONE);
+    }
+
+    private void showAdminLoginScreen() {
         logoutLayout.setVisibility(View.GONE);
         loginLayout.setVisibility(View.VISIBLE);
     }
 
-    private void showLogoutScreen() {
+    private void showAdminLogoutScreen() {
         String usrname = SharedPrefHelper.readStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_USERNAME, "");
         if (!TextUtils.isEmpty(usrname)) {
             username.setText("Login as " + usrname);
@@ -133,13 +167,20 @@ public class UserAccountFragment extends Fragment {
         loginLayout.setVisibility(View.GONE);
     }
 
+    public static boolean isEmailValid(String email) {
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
     @OnClick(R.id.btnLogin)
     public void loadLoginPage() {
         highlightLoginButton();
-        if (!checkSavedLoginInfo()) {
-            showLoginScreen();
+        if (!checkSavedAdminLoginInfo()) {
+            showAdminLoginScreen();
         } else {
-            showLogoutScreen();
+            showAdminLogoutScreen();
         }
 
         adminLoginLayout.setVisibility(View.VISIBLE);
@@ -149,8 +190,30 @@ public class UserAccountFragment extends Fragment {
     @OnClick(R.id.btnSignup)
     public void loadSignupPage() {
         highlightSignupButton();
+        if (!checkSavedCustomerLoginInfo()) {
+            showCustomerLoginScreen();
+        } else {
+            showCustomerLogoutScreen();
+        }
         userSignupLayout.setVisibility(View.VISIBLE);
         adminLoginLayout.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.birthSignup)
+    public void setBirthDate() {
+        final Calendar calendar = Calendar.getInstance();
+        int yy = calendar.get(Calendar.YEAR);
+        int mm = calendar.get(Calendar.MONTH);
+        int dd = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                String date = String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear + 1)
+                        + "/" + String.valueOf(year);
+                birthSignup.setText(date);
+            }
+        }, yy, mm, dd);
+        datePicker.show();
     }
 
     @OnClick(R.id.signupDone)
@@ -158,13 +221,29 @@ public class UserAccountFragment extends Fragment {
         String mobile = mobileSignup.getText().toString();
         String name = nameSignup.getText().toString();
         String email = emailSignup.getText().toString();
+
         String dateOfBirth = birthSignup.getText().toString();
 
-        if (!TextUtils.isEmpty(mobile) && !TextUtils.isEmpty(name)
-                && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(dateOfBirth)) {
-
+        if (isEmailValid(email)) {
+            _Debug("valid email");
+            if (!TextUtils.isEmpty(mobile) && !TextUtils.isEmpty(name)
+                    && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(dateOfBirth)) {
+                _Debug("save client info");
+                CustomerData customerData = new CustomerData(mobile, name, email, dateOfBirth, "");
+                Gson gson = new Gson();
+                String json = gson.toJson(customerData);
+                SharedPrefHelper.writeStringToSharePref(mContext, SharedPrefHelper.PREF_KEY_CUSTOMER_LOGIN_INFO, json);
+                clientInputLayout.setVisibility(View.GONE);
+                clientLogoutLayout.setVisibility(View.VISIBLE);
+            } else {
+                _Debug("NOT save client info");
+                SysUtil.clearClientInfo(mContext);
+                Toast.makeText(mContext, "Incomplete details. Please fill in the form.", Toast.LENGTH_LONG)
+                        .show();
+            }
         } else {
-            Toast.makeText(mContext, "Incomplete details. Please fill in the form.", Toast.LENGTH_LONG)
+            _Debug("invalid email");
+            Toast.makeText(mContext, "Invalid email.", Toast.LENGTH_LONG)
                     .show();
         }
     }
@@ -192,14 +271,29 @@ public class UserAccountFragment extends Fragment {
             postUserLogout(userId);
         }
         SharedPrefHelper.removeStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_USERNAME);
-        showLoginScreen();
+        showAdminLoginScreen();
     }
 
-    private boolean checkSavedLoginInfo() {
+    private boolean checkSavedAdminLoginInfo() {
         UserLoginResp userLoginResp = SysUtil.getLoginUserId(mContext);
         if (userLoginResp != null) {
             userId = userLoginResp.getUserId();
             userName = userLoginResp.getName();
+            if (!TextUtils.isEmpty(userId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkSavedCustomerLoginInfo() {
+        CustomerData customerData = SysUtil.getCustomerLoginInfo(mContext);
+        if (customerData != null) {
+            customerMobile = customerData.getMobile();
+            customerName = customerData.getName();
+            customerEmail = customerData.getEmail();
+            customerBirthDate = customerData.getDob();
+
             if (!TextUtils.isEmpty(userId)) {
                 return true;
             }
@@ -222,7 +316,58 @@ public class UserAccountFragment extends Fragment {
         });
     }
 
-    
+    private void postUserLogin(final String username, final String password) {
+        final CkRestInterface apiInterface = CkRestClient.Companion.getInstance().getInterface();
+        apiInterface.postUserLogin(new UserLoginInput(username, password))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ProgressSubscriber<>(new SubscriberOnNextListener<UserLoginResp>() {
+                    @Override
+                    public void onNext(UserLoginResp response) {
+                        _Debug("onNext -------" + response.getStatus());
+                        if (response.getStatus().equals("OK")) {
+                            userId = response.getUserId();
+                            Gson gson = new Gson();
+                            String json = gson.toJson(response);
+                            SharedPrefHelper.writeStringToSharePref(mContext, SharedPrefHelper.PREF_KEY_LOGIN_INFO, json);
+                            SharedPrefHelper.writeStringToSharePref(mContext, SharedPrefHelper.PREF_KEY_USERNAME, username);
+                            showAdminLogoutScreen();
+                        } else {
+                            Toast.makeText(mContext, response.getMessage(), Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(String httpErrorCode, String httpErrorMsg, String responseMsg) {
+                        _Debug("onError -------");
+                    }
+                }, mContext));
+    }
+
+    private void postUserLogout(final String username) {
+        final CkRestInterface apiInterface = CkRestClient.Companion.getInstance().getInterface();
+        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String timeStamp = timeFormat.format(new Date());
+
+        SharedPrefHelper.writeStringToSharePref(mContext, SharedPrefHelper.PREF_KEY_LOGIN_INFO, "");
+        SharedPrefHelper.writeStringToSharePref(mContext, SharedPrefHelper.PREF_KEY_USERNAME, "");
+        _Debug("timeStamp: (" + timeStamp + ")");
+        apiInterface.postUserLogout(new UserLogoutInput(username, timeStamp))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ProgressSubscriber<>(new SubscriberOnNextListener<UserLogoutResp>() {
+                    @Override
+                    public void onNext(UserLogoutResp response) {
+                        _Debug("onNext -------" + response.getStatus());
+                    }
+
+                    @Override
+                    public void onError(String httpErrorCode, String httpErrorMsg, String responseMsg) {
+                        _Debug("onError -------");
+                    }
+                }, mContext));
+    }
 
     private static void _Debug(String str) {
         Log.d("widget", str);

@@ -148,7 +148,7 @@
                             android:text=""
                             android:textColor="@color/colorPrimary"
                             android:textSize="@dimen/font_size_medium" />
-                        
+
                         <Button
                             android:id="@+id/clientLogoutButton"
                             android:layout_width="@dimen/general_button_width"
