@@ -142,6 +142,7 @@ public class UserAccountFragment extends Fragment {
     }
 
     private void showCustomerLogoutScreen() {
+        _Debug("------ showCustomerLogoutScreen: " + customerMobile);
         clientMobile.setText("Mobile: " + customerMobile);
         clientName.setText("Name: " + customerName);
         clientEmail.setText("Email: " + customerEmail);
@@ -273,6 +274,13 @@ public class UserAccountFragment extends Fragment {
         SharedPrefHelper.removeStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_USERNAME);
         showAdminLoginScreen();
     }
+
+    @OnClick(R.id.clientLogoutButton)
+    public void logoutCustomer() {
+        SharedPrefHelper.removeStringFromSharedPref(mContext, SharedPrefHelper.PREF_KEY_CUSTOMER_LOGIN_INFO);
+        showCustomerLoginScreen();
+    }
+
 
     private boolean checkSavedAdminLoginInfo() {
         UserLoginResp userLoginResp = SysUtil.getLoginUserId(mContext);

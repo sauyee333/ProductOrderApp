@@ -113,41 +113,45 @@
                             android:id="@+id/clientMobile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:text=""
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/font_size_medium" />
+                            android:textSize="@dimen/font_size_medium"
+                            tools:text="12345" />
 
                         <TextView
                             android:id="@+id/clientName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:text=""
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/font_size_medium" />
+                            android:textSize="@dimen/font_size_medium"
+                            tools:text="ali" />
 
                         <TextView
                             android:id="@+id/clientEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginTop="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:text=""
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/font_size_medium" />
+                            android:textSize="@dimen/font_size_medium"
+                            tools:text="alibaba@gmail.com" />
 
                         <TextView
                             android:id="@+id/clientBirthDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:layout_marginTop="50dp"
+                            android:layout_marginTop="10dp"
                             android:text=""
                             android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/font_size_medium" />
+                            android:textSize="@dimen/font_size_medium"
+                            tools:text="11/12/2010" />
 
                         <Button
                             android:id="@+id/clientLogoutButton"
@@ -159,7 +163,7 @@
                             android:gravity="center"
                             android:padding="10dp"
                             android:singleLine="true"
-                            android:text="Logout"
+                            android:text="Clear user"
                             android:textAllCaps="false"
                             android:textColor="@android:color/white"
                             android:textSize="@dimen/font_size_large" />
